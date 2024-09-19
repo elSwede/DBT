@@ -3,6 +3,7 @@ version: 2
 
 sources:
    - name : PELOTON
+     description: "The raw data file from Peloton"
      database: WORKOUTS
      schema: RAW_DATA
      tables:
@@ -25,7 +26,7 @@ models:
             tests:
                 - unique
                 - not_null
-    - name: classe_titles
+    - name: class_titles
       description: "List of Classes"
       columns:
           - name: class_title_id
