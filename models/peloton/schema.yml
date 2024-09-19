@@ -6,13 +6,13 @@ sources:
      database: WORKOUTS
      schema: RAW_DATA
      tables:
-       - name: RIDES
+       - name: PELOTON_WORKOUTS
 
 models:
     - name: instructors
       description: "List of Instructors"
       columns:
-          - name: instructor_name
+          - name: instructor_id
             description: "The primary key for this table"
             tests:
                 - unique

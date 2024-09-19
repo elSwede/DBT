@@ -1,8 +1,47 @@
 {{ config(materialized='table') }}
 
 select distinct
-  --{{ dbt-labs/dbt_utils.surrogate_key(['instructor_name']) }} as instructor_id
-  --{{ dbt_utils.generate_surrogate_key(['instructor_name']) }} as instructor_id
-  
- instructor_name
-from {{ source("PELOTON", "RIDES") }}
+  md5(COALESCE(instructor_name, 'No Instructor')) AS instructor_id
+, COALESCE(instructor_name, 'No Instructor') AS instructor_name
+, CASE WHEN instructor_name IS NULL THEN 'N/A'
+       WHEN instructor_name = 'Christine D''Ercole' THEN 'Female'
+       WHEN instructor_name = 'Kendall Toole' THEN 'Female'
+       WHEN instructor_name = 'Jess Sims' THEN 'Female'
+       WHEN instructor_name = 'Emma Lovewell' THEN 'Female'
+       WHEN instructor_name = 'Rebecca Kennedy' THEN 'Female'
+       WHEN instructor_name = 'Selena Samuela' THEN 'Female'
+       WHEN instructor_name = 'Jess King' THEN 'Female'
+       WHEN instructor_name = 'Leanne Hainsby-Alldis' THEN 'Female'
+       WHEN instructor_name = 'Jenn Sherman' THEN 'Female'
+       WHEN instructor_name = 'Ally Love' THEN 'Female'
+       WHEN instructor_name = 'Hannah Corbin' THEN 'Female'
+       WHEN instructor_name = 'Callie Gullickson' THEN 'Female'
+       WHEN instructor_name = 'Olivia Amato' THEN 'Female'
+       WHEN instructor_name = 'Becs Gentry' THEN 'Female'
+       WHEN instructor_name = 'Susie Chan' THEN 'Female'
+       WHEN instructor_name = 'Charlotte Weidenbach' THEN 'Female'
+       WHEN instructor_name = 'Mila Lazar' THEN 'Female'
+       WHEN instructor_name = 'Joslyn Thompson Rule' THEN 'Female'
+       WHEN instructor_name = 'Rad Lopez' THEN 'Female'
+       WHEN instructor_name = 'Hannah Frankson' THEN 'Female'
+       WHEN instructor_name = 'Mayla Wedekind' THEN 'Female'
+       WHEN instructor_name = 'Camila Ramon' THEN 'Female'
+       WHEN instructor_name = 'Daniel McKenna' THEN 'Female'
+       WHEN instructor_name = 'Robin Arzon' THEN 'Female'
+       WHEN instructor_name = 'Andy Speer' THEN 'Male'
+       WHEN instructor_name = 'Tunde Oyeneyin' THEN 'Male'
+       WHEN instructor_name = 'Denis Morton' THEN 'Male'
+       WHEN instructor_name = 'Matt Wilpers' THEN 'Male'
+       WHEN instructor_name = 'Adrian Williams' THEN 'Male'
+       WHEN instructor_name = 'Ben Alldis' THEN 'Male'
+       WHEN instructor_name = 'Matty Maggiacomo' THEN 'Male'
+       WHEN instructor_name = 'Erik Jager' THEN 'Male'
+       WHEN instructor_name = 'Sam Yo' THEN 'Male'
+       WHEN instructor_name = 'Chase Tucker' THEN 'Male'
+       WHEN instructor_name = 'Benny Adami' THEN 'Male'
+       WHEN instructor_name = 'Logan Aldridge' THEN 'Male'
+       WHEN instructor_name = 'Alex Toussaint' THEN 'Male'
+       WHEN instructor_name = 'Bradley Rose' THEN 'Male'
+       WHEN instructor_name = 'Cliff Dwenger' THEN 'Male'
+    ELSE 'Missing Instructor' END AS instructor_gender
+from {{ source("PELOTON", "PELOTON_WORKOUTS") }}
