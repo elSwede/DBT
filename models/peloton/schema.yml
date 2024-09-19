@@ -17,4 +17,29 @@ models:
             tests:
                 - unique
                 - not_null
+    - name: classes
+      description: "List of Classes taken at a specific time"
+      columns:
+          - name: class_id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+    - name: classe_titles
+      description: "List of Classes"
+      columns:
+          - name: class_title_id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+    - name: workouts
+      description: "List of Classes attended"
+      columns:
+          - name: workout_id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+
 
